@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="libs/gson-2.2.4.jar" sourcepath="libs/gson-2.2.4-sources.jar"/>
+	<classpathentry kind="lib" path="libs/groovy-all-2.1.0-beta-1-indy.jar"/>
+	<classpathentry kind="lib" path="libs/javax.mail.jar"/>
+	<classpathentry kind="lib" path="libs/netty-3.9.0.Final.jar" sourcepath="libs/netty-3.9.0.Final-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

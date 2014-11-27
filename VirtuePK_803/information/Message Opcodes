@@ -1,0 +1,15 @@
+0 - Game unfiltered
+
+3 - Private incomming filterable
+
+4 - Private system message
+
+6 - Private outgoing 
+
+7 - Private incomming unfilterable
+
+9 - Friends chat message
+
+11 - Friends chat system message
+
+99 - Console message
