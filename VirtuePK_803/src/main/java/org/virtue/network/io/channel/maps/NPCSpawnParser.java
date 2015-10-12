@@ -15,6 +15,16 @@ import org.virtue.utility.ServerUtils;
  * @version 1.0
  */
 public class NPCSpawnParser implements IOParser<List<NPC>> {
+
+	private final File SAVE_PATH;
+
+	{
+		if (ServerUtils.isWindows()) {
+			SAVE_PATH = new File(ServerUtils.getServerLocation() + "\\data\\landscape\\NPCSpawns.txt");
+		} else {
+			SAVE_PATH = new File(ServerUtils.getServerLocation() + "/data/landscape/NPCSpawns.txt");
+		}
+	}
 	
 	/**
 	 * (non-Javadoc)
@@ -56,11 +66,7 @@ public class NPCSpawnParser implements IOParser<List<NPC>> {
 	 */
 	@Override
 	public File getPath() {
-		if (ServerUtils.isWindows()) {
-			return new File(ServerUtils.getServerLocation() + "\\data\\landscape\\NPCSpawns.txt");
-		} else {
-			return new File(ServerUtils.getServerLocation() + "/data/landscape/NPCSpawns.txt");
-		}
+		return SAVE_PATH;
 	}
 
 }

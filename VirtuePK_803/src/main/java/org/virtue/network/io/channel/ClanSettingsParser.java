@@ -12,10 +12,19 @@ import org.virtue.network.io.IOParser;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.virtue.utility.ServerUtils;
 
 public class ClanSettingsParser implements IOParser<ClanSettings> {
 
-	private File SAVE_PATH = new File("data/clans/");
+	private final File SAVE_PATH;
+
+	{
+		if (ServerUtils.isWindows()) {
+			SAVE_PATH = new File(ServerUtils.getServerLocation() + "\\data\\clans\\");
+		} else {
+			SAVE_PATH = new File(ServerUtils.getServerLocation() + "/data/clans/");
+		}
+	}
 	
 	private static final int LATEST_VERSION = 6;
 	

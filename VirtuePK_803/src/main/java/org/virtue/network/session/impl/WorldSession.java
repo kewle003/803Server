@@ -4,6 +4,7 @@ import java.net.ProtocolException;
 
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.virtue.Launcher;
+import org.virtue.game.logic.World;
 import org.virtue.game.logic.node.entity.player.Player;
 import org.virtue.network.RS2Network;
 import org.virtue.network.protocol.handlers.PacketHandler;

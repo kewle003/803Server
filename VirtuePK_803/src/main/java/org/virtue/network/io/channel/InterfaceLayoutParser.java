@@ -12,11 +12,20 @@ import org.virtue.network.io.IOParser;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import org.virtue.utility.ServerUtils;
 
 public class InterfaceLayoutParser implements IOParser<InterfaceLayout> {
 	
 
-	private File SAVE_PATH = new File("data/interface_layouts/");
+	private final File SAVE_PATH;
+
+	{
+		if (ServerUtils.isWindows()) {
+			SAVE_PATH = new File(ServerUtils.getServerLocation() + "\\data\\interface_layouts\\");
+		} else {
+			SAVE_PATH = new File(ServerUtils.getServerLocation() + "/data/interface_layouts/");
+		}
+	}
 
 	@Override
 	public InterfaceLayout load(Object... params) throws FileNotFoundException {

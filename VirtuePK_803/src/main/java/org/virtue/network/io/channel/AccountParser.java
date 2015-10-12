@@ -1,10 +1,6 @@
 package org.virtue.network.io.channel;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -26,6 +22,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import org.virtue.utility.ServerUtils;
 
 /**
  * @author Taylor
@@ -43,7 +40,15 @@ public class AccountParser implements IOParser<Account> {
 	 * (non-Javadoc)
 	 * @see org.virtue.network.io.IOParser#SAVE_PATH
 	 */
-	private File SAVE_PATH = new File("data/characters/");
+	private final File SAVE_PATH;
+
+	{
+		if (ServerUtils.isWindows()) {
+			SAVE_PATH = new File(ServerUtils.getServerLocation() + "\\data\\characters\\");
+		} else {
+			SAVE_PATH = new File(ServerUtils.getProjectLocation() + "/data/characters/");
+		}
+	}
 	
 	/**
 	 * (non-Javadoc)
@@ -158,13 +163,15 @@ public class AccountParser implements IOParser<Account> {
 		System.out.println("Saving player...");
 		
 		File file = new File(getPath(), p.getAccount().getUsername().getAccountNameAsProtocol()+".json");
-		/*if (file.exists())
-			file.delete();*/
 		try {
-			FileWriter writer = new FileWriter(file);
-			writer.write(obj.toString());
-			writer.flush();
-			writer.close();
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+
+			BufferedWriter bufferedOutputStream = new BufferedWriter(new FileWriter(file));
+			bufferedOutputStream.write(obj.toString());
+			bufferedOutputStream.flush();
+			bufferedOutputStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;

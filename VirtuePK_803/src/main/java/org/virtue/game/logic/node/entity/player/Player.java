@@ -191,6 +191,8 @@ public class Player extends Entity {
 				setRunEnergy(account.getCharFile().get("runEnergy").getAsInt());
 				getUpdateArchive().getMovement().setRunning(account.getCharFile().get("isRunning").getAsBoolean());
 			}
+		} else {
+			IOHub.getAccountIo().save(this);
 		}
 		if (IOHub.getVarIO().exists(account.getUsername().getAccountNameAsProtocol())) {
 			try {

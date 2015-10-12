@@ -60,4 +60,17 @@ public class Password {
 	public void setPassword(String password) {
 		this.password = (encrypt ? Encryption.SHA1Encryption(password).getEncryption() : password);
 	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (other instanceof Password) {
+			Password otherPassword = (Password) other;
+			if (otherPassword.isEncrypt()) {
+				return otherPassword.getPassword().equals(Encryption.SHA1Encryption(password).getEncryption());
+			} else if (encrypt) {
+				return Encryption.SHA1Encryption(otherPassword.getPassword()).getEncryption().equals(password);
+			}
+		}
+		return false;
+	}
 }

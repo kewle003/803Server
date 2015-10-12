@@ -13,10 +13,19 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.virtue.utility.ServerUtils;
 
 public class VarParser implements IOParser<int[]> {
 	
-	private File SAVE_PATH = new File("data/characters/vars/");
+	private final File SAVE_PATH;
+
+	{
+		if (ServerUtils.isWindows()) {
+			SAVE_PATH = new File(ServerUtils.getServerLocation() + "\\data\\characters\\vars\\");
+		} else {
+			SAVE_PATH = new File(ServerUtils.getServerLocation() + "/data/characters/vars/");
+		}
+	}
 
 	@Override
 	public int[] load(Object... params) throws FileNotFoundException {

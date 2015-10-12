@@ -19,9 +19,15 @@ public class FriendsParser implements IOParser<InternalFriendManager> {
 	 * (non-Javadoc)
 	 * @see org.virtue.network.io.IOParser#SAVE_PATH
 	 */
-	private File SAVE_PATH_LINUX = new File("data/friends/");
+	private final File SAVE_PATH;
 
-	private File SAVE_PATH_WINDOWS = new File("data\\friends\\");
+	{
+		if (ServerUtils.isWindows()) {
+			SAVE_PATH = new File(ServerUtils.getServerLocation() + "\\data\\friends\\");
+		} else {
+			SAVE_PATH = new File(ServerUtils.getServerLocation() + "/data/friends/");
+		}
+	}
 	
 	@Override
 	public InternalFriendManager load(Object... params) throws FileNotFoundException {
@@ -58,11 +64,7 @@ public class FriendsParser implements IOParser<InternalFriendManager> {
 
 	@Override
 	public File getPath() {
-		if (ServerUtils.isWindows()) {
-			return SAVE_PATH_WINDOWS;
-		}
-
-		return SAVE_PATH_LINUX;
+		return SAVE_PATH;
 	}
 	
 	public boolean exists(String name) {
